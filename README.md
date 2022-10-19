@@ -11,7 +11,7 @@
 - [Machine Learning Model](#machine-learning-model)
     - [Preprocessing the Data](#Preprocessing-the-Data)
         - [About the data](#about-the-data)
-        - [Feature Engineering, Selection, and Model Tweaking](#Feature-Engineering,-Selection,-and-Model-Tweaking)
+        - [Feature Engineering](#Feature-Engineering)
         - [Density Plots and Binning](#Density-Plots-and-Binning)
         - [Encoding the Categorical Variables](#Encoding-the-Categorical-Variables)
         - [Splitting the Preprocessed Data](#Splitting-the-Preprocessed-Data)
@@ -90,7 +90,7 @@ The data contains categorical and numerical variables.
  
 The ‘GRADE’ variable consists of ‘A’, ‘B’, ‘C’, ‘N’, ‘P’, and ‘Z’ values. ‘P’ signifies ‘pending’ but 'N' and 'Z' are not explained anywhere in the data source. 'N' could also mean 'Null' and keeping rows with this value will adversely affect our model. Since we are unsure about the meaning of 'N' and 'Z', we decided to drop the rows with values 'N' and 'Z' along with 'P'.
 
-#### Feature Engineering, Selection, and Model Tweaking:
+#### Feature Engineering:
 The target variable can either be 'SCORE' or 'GRADE'. 'SCORE' signifies the number of points deducted from the total obtainable marks, if the restaurant is found lacking in any of the measures that add up to a health grade. This means 'SCORE' and 'GRADE' have an inverse relationship with one another. However, they both signify the same thing - a health grading. The higher the 'SCORE' (since it is a deduction the total obtainable marks), the lower the health 'GRADE'. Since either 'SCORE' or 'GRADE' can suffice as a target variable, we chose 'GRADE' to be the target variable.
 
 The features variables can include: ‘DBA’, ‘STREET’, INCOME_LEVEL’, ‘BOROUGH’, ‘CUISINE_DESCRIPTION’, and ‘ZIPCODE’. We experimented with these features variables and shortlisted the features variables down to only the ones that do not have a non-significant effect on our model. Different model designs were tried out by keeping 'GRADE' as the target variable but including a different set of features variables each time (all experiment models can be found in the [ML_experiments](https://github.com/SohaT7/NYC_Restaurant_Analysis/tree/main/ML_model/ML_experiments) folder):
@@ -135,12 +135,12 @@ The plot below shows the accuracy scores obtained by running the different machi
 
 The best supervised machine learning model proves to be the Random Forest Classifier, which has an accuracy score of 0.97. 
 
-![Classification Report for Random Forest Classifier](https://github.com/SohaT7/NYC_Restaurant_Analysis/blob/main/ML_model/Images/confusion_matrix.png)
-
 #### Evaluating the Model:
-Our Random Forest Classifier model had an accuracy score of 0.97. A Random Forest Classifier involves training each weak learner on a subset of the data and then bases its result on the consensus reached by these weak learners together. A Random Forest Classifier model can miss out on the variability in the data. However, if the model’s number of estimators and the depth is sufficient, it should perform quite well. The confusion matrix for this model can be seen below:
+Our Random Forest Classifier model had an accuracy score of 0.97. A Random Forest Classifier involves training each weak learner on a subset of the data and then bases its result on the consensus reached by these weak learners together. A Random Forest Classifier model can miss out on the variability in the data. However, if the model’s number of estimators and the depth is sufficient, it should perform quite well. The confusion matrix and the classification report for this model can be seen below:
 
 <img width="450" alt="Confusion Matrix" src="https://github.com/SohaT7/NYC_Restaurant_Analysis/blob/main/ML_model/Images/CM.png">
+
+![Classification Report for Random Forest Classifier](https://github.com/SohaT7/NYC_Restaurant_Analysis/blob/main/ML_model/Images/confusion_matrix.png)
 
 The model's precision to predict 'high' grades is 0.97, whereas its precision to predict 'low' grades is 0.00. The model's recall (or sensitivity) for 'high' grades is 1.00, whereas recall for 'low' grades is 0.00.
 
